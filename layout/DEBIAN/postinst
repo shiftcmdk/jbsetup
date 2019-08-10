@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "running chown and chmod on jbspw"
+
+chown root:wheel /usr/bin/jbspw
+chmod 6755 /usr/bin/jbspw
+
+echo "running chown and chmod on jbstouch"
+
+chown root:wheel /usr/bin/jbstouch
+chmod 6755 /usr/bin/jbstouch

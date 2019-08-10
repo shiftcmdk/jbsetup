@@ -1,0 +1,2 @@
+@interface JBSCustomNavigationController: UINavigationController
+@end

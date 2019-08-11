@@ -1,5 +1,6 @@
 #import "JBSWelcomeViewController.h"
 #import "JBSPasswordManager.h"
+#import "JBSDummyViewController.h"
 
 @interface JBSWelcomeViewController ()
 
@@ -51,7 +52,13 @@
 }
 
 -(void)getStartedButtonTapped:(UIButton *)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    __weak UIViewController *presentingVC = self.presentingViewController;
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        if ([presentingVC isKindOfClass:[JBSDummyViewController class]]) {
+            presentingVC.view.hidden = YES;
+            [presentingVC.view removeFromSuperview];
+        }
+    }];
 }
 
 /*

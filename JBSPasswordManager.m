@@ -30,8 +30,8 @@
 
     NSString *errorString;
 
-	if (fp) {
-		if (fputs([password UTF8String], fp) == EOF) {
+    if (fp) {
+        if (fputs([password UTF8String], fp) == EOF) {
             errorString = @"An internal error occured. (EOF)";
 
             pclose(fp);
@@ -77,7 +77,7 @@
                 errorString = @"An internal error occured.";
             }
         }
-	} else {
+    } else {
         errorString = @"An internal error occured. (popen)";
     }
 
@@ -119,14 +119,14 @@
 
     NSError *err;
 
-	NSDictionary *fileAttribs = [[NSFileManager defaultManager] attributesOfItemAtPath:@"/etc/master.passwd" error:&err];
+    NSDictionary *fileAttribs = [[NSFileManager defaultManager] attributesOfItemAtPath:@"/etc/master.passwd" error:&err];
 
-	if (err) {
-		return NO;
-	}
+    if (err) {
+        return NO;
+    }
 
     // the master.passwd could get restored so we check for the modified date
-	NSDate *modifiedDate = [fileAttribs objectForKey:NSFileModificationDate];
+    NSDate *modifiedDate = [fileAttribs objectForKey:NSFileModificationDate];
 
     if (!modifiedDate) {
         return YES;

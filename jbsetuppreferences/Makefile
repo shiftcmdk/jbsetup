@@ -4,7 +4,7 @@ TARGET = iphone::11.0
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = jbsetuppreferences
-jbsetuppreferences_FILES = JBSRootListController.m ../JBSCustomNavigationController.m ../JBSCompletedViewController.m ../JBSSetupViewController.m ../JBSPasswordViewController.m ../JBSContinueButton.m ../JBSLoadingViewController.m ../JBSWelcomeViewController.m ../JBSPasswordManager.m
+jbsetuppreferences_FILES = JBSRootListController.m ../JBSCustomNavigationController.m ../JBSCompletedViewController.m ../JBSSetupViewController.m ../JBSPasswordViewController.m ../JBSContinueButton.m ../JBSLoadingViewController.m ../JBSWelcomeViewController.m ../JBSPasswordManager.m ../JBSDummyViewController.m
 jbsetuppreferences_INSTALL_PATH = /Library/PreferenceBundles
 jbsetuppreferences_FRAMEWORKS = UIKit
 jbsetuppreferences_PRIVATE_FRAMEWORKS = Preferences

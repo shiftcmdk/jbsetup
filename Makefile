@@ -4,7 +4,7 @@ TARGET = iphone::11.0
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = jbsetup
-jbsetup_FILES = Tweak.xm JBSCompletedViewController.m JBSContinueButton.m JBSLoadingViewController.m JBSPasswordViewController.m JBSSetupViewController.m JBSWelcomeViewController.m JBSPasswordManager.m JBSCustomNavigationController.m
+jbsetup_FILES = Tweak.xm JBSCompletedViewController.m JBSContinueButton.m JBSLoadingViewController.m JBSPasswordViewController.m JBSSetupViewController.m JBSWelcomeViewController.m JBSPasswordManager.m JBSCustomNavigationController.m JBSDummyViewController.m
 
 ADDITIONAL_OBJCFLAGS = -fobjc-arc
 

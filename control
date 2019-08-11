@@ -1,7 +1,7 @@
 Package: com.shiftcmdk.jbsetup
 Name: jbsetup
 Depends: mobilesubstrate
-Version: 1.0
+Version: 1.0.1
 Architecture: iphoneos-arm
 Description: A setup UI to change the root and mobile password after jailbreaking.
 Maintainer: shiftcmdk

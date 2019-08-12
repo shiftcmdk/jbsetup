@@ -24,10 +24,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 /*
 #pragma mark - Navigation
 

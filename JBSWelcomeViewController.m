@@ -57,6 +57,8 @@
         if ([presentingVC isKindOfClass:[JBSDummyViewController class]]) {
             presentingVC.view.hidden = YES;
             [presentingVC.view removeFromSuperview];
+            UIWindow *window = [presentingVC valueForKey:@"window"];
+            window.hidden = YES;
         }
     }];
 }

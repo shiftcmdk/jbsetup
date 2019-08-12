@@ -6,6 +6,7 @@
 @interface SBHomeScreenViewController : UIViewController
 @end
 
+UIWindow *setupWindow;
 JBSDummyViewController *ctrl;
 BOOL readyToShowSetupUI = NO;
 
@@ -14,7 +15,12 @@ BOOL readyToShowSetupUI = NO;
 -(void)viewDidLoad {
     %orig;
 
+    setupWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    setupWindow.windowLevel = UIWindowLevelStatusBar - 10;
+
     ctrl = [[JBSDummyViewController alloc] init];
+
+    setupWindow.rootViewController = ctrl;
 }
 
 %end
@@ -33,14 +39,19 @@ BOOL readyToShowSetupUI = NO;
     if (readyToShowSetupUI) {
         SpringBoard *sb = (SpringBoard *)[UIApplication sharedApplication];
 
+        if (ctrl && ctrl.presentedViewController) {
+            UIView *statusBar = [[UIApplication sharedApplication] valueForKey:@"_statusBar"];
+            [statusBar setValue:[UIColor blackColor] forKey:@"foregroundColor"];
+            [statusBar setValue:@0 forKey:@"legibilityStyle"];
+        }
+
         if (ctrl && !ctrl.presentedViewController && [sb isShowingHomescreen] && [[JBSPasswordManager sharedManager] shouldChangePassword]) {
-            UIWindow *window = [[UIApplication sharedApplication] valueForKey:@"_statusBarWindow"];
-
             ctrl.view.hidden = NO;
+            [setupWindow makeKeyAndVisible];
 
-            if (!ctrl.view.superview) {
-                [window insertSubview:ctrl.view atIndex:0];
-            }
+            UIView *statusBar = [[UIApplication sharedApplication] valueForKey:@"_statusBar"];
+
+            ctrl.lastForegroundColor = [statusBar valueForKey:@"foregroundColor"];
 
             JBSCompletedViewController *completedVC = [[JBSCompletedViewController alloc] init];
             completedVC.view.backgroundColor = [UIColor whiteColor];
@@ -66,6 +77,7 @@ BOOL readyToShowSetupUI = NO;
         [ctrl dismissViewControllerAnimated:NO completion:nil];
     }
     ctrl.view.hidden = YES;
+    setupWindow.hidden = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -76,6 +88,7 @@ BOOL readyToShowSetupUI = NO;
     }
 
     ctrl.view.hidden = YES;
+    setupWindow.hidden = YES;
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -85,14 +98,9 @@ BOOL readyToShowSetupUI = NO;
 
     readyToShowSetupUI = YES;
 
-    UIWindow *window = [[UIApplication sharedApplication] valueForKey:@"_statusBarWindow"];
-
     if (ctrl && !ctrl.presentedViewController && [sb isShowingHomescreen] && [[JBSPasswordManager sharedManager] shouldChangePassword]) {
         ctrl.view.hidden = NO;
-
-        if (!ctrl.view.superview) {
-            [window insertSubview:ctrl.view atIndex:0];
-        }
+        [setupWindow makeKeyAndVisible];
 
         UIView *statusBar = [[UIApplication sharedApplication] valueForKey:@"_statusBar"];
 
